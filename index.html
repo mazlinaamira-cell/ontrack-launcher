@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="ms"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OnTrack | Jabatan Farmasi Hospital Kemaman</title>
+<link rel="manifest" href="./manifest.webmanifest"><meta name="theme-color" content="#174a86">
+<link rel="icon" type="image/png" href="./icons/icon-192.png"><link rel="apple-touch-icon" href="./icons/icon-192.png">
+<style>
+*{box-sizing:border-box}body{margin:0;font:15px system-ui,-apple-system,Segoe UI,sans-serif;background:#eff5fc;color:#17365d;min-height:100vh}
+header{background:linear-gradient(122deg,#123c70,#206cb7 72%,#74bbee);color:white;padding:28px 22px 66px;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;width:250px;height:250px;border:35px solid #ffffff17;border-radius:50%;right:-100px;top:-100px}
+.wrap{max-width:560px;margin:auto}.brand{display:flex;align-items:center;gap:16px;position:relative;z-index:1}
+.brand img{width:86px;height:86px;object-fit:contain;border-radius:20px;background:white;box-shadow:0 8px 22px #0c295e44}
+h1{font-size:31px;letter-spacing:-.8px;margin:0 0 4px}header p{margin:3px 0;font-size:13px;opacity:.95}
+main{position:relative;max-width:560px;margin:-36px auto 0;padding:0 17px 32px}
+.panel{background:white;border-radius:20px;padding:24px;box-shadow:0 14px 35px #143c6c1c}
+h2{font-size:21px;margin:0 0 8px}p{line-height:1.6}.muted{color:#5b728a;font-size:13px}
+a.primary{display:block;text-align:center;text-decoration:none;background:#195ca0;color:white;padding:16px 18px;border-radius:13px;font-weight:700;margin:21px 0 10px;box-shadow:0 5px 12px #195ca024}
+a.primary[aria-disabled="true"]{opacity:.55;pointer-events:none}.note{background:#f0f6fc;border-radius:12px;padding:12px 14px;margin-top:20px;font-size:13px;color:#365b7b}
+small{font-size:12px}.error{color:#a52638;display:none;font-size:13px}
+@media(max-width:390px){h1{font-size:27px}.brand img{width:72px;height:72px}header{padding:24px 17px 65px}}
+</style></head><body>
+<header><div class="wrap"><div class="brand"><img src="./icons/icon-192.png" alt="Logo OnTrack"><div><h1>OnTrack</h1><p>Jabatan Farmasi Hospital Kemaman</p><p><small>Established November 2026</small></p></div></div></div></header>
+<main><div class="panel"><h2>Selamat datang 👋</h2><p>Portal akses rasmi ke dashboard OnTrack.</p>
+<a class="primary" id="openBtn" href="#" aria-disabled="true">Buka Dashboard OnTrack ↗</a><p class="error" id="missing">Pautan dashboard belum ditetapkan. Pentadbir perlu kemas kini config.js dahulu.</p>
+<div class="note"><b>Tambah ke Home Screen</b><p>Di Samsung Chrome, tekan menu ⋮ → <b>Add to Home screen</b> / <b>Install app</b>. Gunakan ikon OnTrack untuk membuka halaman ini, kemudian tekan <b>Buka Dashboard OnTrack</b>.</p></div>
+<p class="muted">Akses dashboard dan acknowledgement kekal dikendalikan oleh sistem Google Apps Script sedia ada. Jangan masukkan data pesakit dalam halaman pelancar ini.</p></div></main>
+<script src="./config.js"></script><script>
+const raw=(window.ONTRACK_APP_URL||'').trim();
+let valid=false;
+try {const url=new URL(raw);valid=url.protocol==='https:' && url.hostname==='script.google.com' && /\/exec\/?$/.test(url.pathname)}catch(e){}
+const btn=document.getElementById('openBtn');
+if(valid){btn.href=raw;btn.removeAttribute('aria-disabled');}else{document.getElementById('missing').style.display='block';}
+if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js').catch(()=>{});}
+</script></body></html>
